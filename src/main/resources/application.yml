@@ -9,6 +9,8 @@ datasources:
     dialect: MYSQL
 
 jpa.default.properties.hibernate.hbm2ddl.auto: none
+jpa.default.entity-scan.packages: com.company.domain
+
 
 jpa:
   default:

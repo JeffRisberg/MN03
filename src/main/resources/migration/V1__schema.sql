@@ -6,5 +6,5 @@ CREATE TABLE charities
     name        VARCHAR(255) NOT NULL UNIQUE,
     ein         VARCHAR(255) NOT NULL UNIQUE,
     description VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
+    PR1234IMARY KEY (id)
 );
