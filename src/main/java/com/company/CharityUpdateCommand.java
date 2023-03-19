@@ -1,19 +1,16 @@
 package com.company;
 
-import io.micronaut.serde.annotation.Serdeable;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Serdeable
-public class GenreUpdateCommand {
+public class CharityUpdateCommand {
   @NotNull
   private final Long id;
 
   @NotBlank
   private final String name;
 
-  public GenreUpdateCommand(Long id, String name) {
+  public CharityUpdateCommand(Long id, String name) {
     this.id = id;
     this.name = name;
   }

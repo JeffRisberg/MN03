@@ -1,6 +1,6 @@
 package com.company;
 
-import com.example.domain.Genre;
+import com.company.domain.Charity;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.exceptions.DataAccessException;
@@ -13,13 +13,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @JdbcRepository(dialect = Dialect.MYSQL)
-public interface GenreRepository extends PageableRepository<Genre, Long> {
+public interface CharityRepository extends PageableRepository<Charity, Long> {
 
-  Genre save(@NonNull @NotBlank String name);
+  Charity save(@NonNull @NotBlank String name, @NonNull @NotBlank String ein, String description);
 
   @Transactional
-  default Genre saveWithException(@NonNull @NotBlank String name) {
-    save(name);
+  default Charity saveWithException(@NonNull @NotBlank String name, @NonNull @NotBlank String ein, String description) {
+    save(name, ein, description);
     throw new DataAccessException("test exception");
   }
 
