@@ -6,19 +6,19 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "charities")
+@Table(name = "donors")
 @Data
-public class Charity {
+public class Donor {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   protected Long id;
 
   @NotNull
-  private String name;
+  private String firstName;
 
   @NotNull
-  private String ein;
+  private String lastName;
 
-  private String description;
+  private String address;
 }
