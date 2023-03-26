@@ -15,9 +15,11 @@ public class Donor {
   protected Long id;
 
   @NotNull
+  @Column(name = "first_name", nullable = false)
   private String firstName;
 
   @NotNull
+  @Column(name = "last_name", nullable = false)
   private String lastName;
 
   private String address;
