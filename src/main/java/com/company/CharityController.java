@@ -26,23 +26,15 @@ public class CharityController {
     this.charityRepository = charityRepository;
   }
 
+  @Get("/list")
+  public List<Charity> list(@Valid Pageable pageable) {
+    return charityRepository.findAll(pageable).getContent();
+  }
+
   @Get("/{id}")
   public Optional<Charity> show(Long id) {
     return charityRepository
       .findById(id);
-  }
-
-  @Put
-  public HttpResponse update(@Body @Valid CharityUpdateCommand command) {
-    charityRepository.update(command.getId(), command.getName());
-    return HttpResponse
-      .noContent()
-      .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
-  }
-
-  @Get("/list")
-  public List<Charity> list(@Valid Pageable pageable) {
-    return charityRepository.findAll(pageable).getContent();
   }
 
   @Post
@@ -50,6 +42,7 @@ public class CharityController {
     @Body("name") @NotBlank String name,
     @Body("ein") @NotBlank String ein,
     @Body("description") @NotBlank String description) {
+
     Charity charity = charityRepository.save(name, ein, description);
 
     return HttpResponse
@@ -71,6 +64,14 @@ public class CharityController {
     } catch (DataAccessException e) {
       return HttpResponse.noContent();
     }
+  }
+
+  @Put
+  public HttpResponse update(@Body @Valid CharityUpdateCommand command) {
+    charityRepository.update(command.getId(), command.getName());
+    return HttpResponse
+      .noContent()
+      .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
   }
 
   @Delete("/{id}")

@@ -26,31 +26,24 @@ public class DonorController {
     this.donorRepository = donorRepository;
   }
 
+  @Get("/list")
+  public List<Donor> list(@Valid Pageable pageable) {
+    return donorRepository.findAll(pageable).getContent();
+  }
+
+
   @Get("/{id}")
   public Optional<Donor> show(Long id) {
     return donorRepository
       .findById(id);
   }
 
-  @Put
-  public HttpResponse update(@Body @Valid DonorUpdateCommand command) {
-    donorRepository.update(command.getId(), command.getFirstName(), command.getLastName(), command.getAddress());
-    return HttpResponse
-      .noContent()
-      .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
-  }
-
-  @Get("/list")
-  public List<Donor> list(@Valid Pageable pageable) {
-    return donorRepository.findAll(pageable).getContent();
-  }
-
   @Post
   public HttpResponse<Donor> save(
-    @Body("name") @NotBlank String name,
-    @Body("ein") @NotBlank String ein,
-    @Body("description") @NotBlank String description) {
-    Donor donor = donorRepository.save(name, ein, description);
+    @Body("firstName") @NotBlank String firstName,
+    @Body("lastName") @NotBlank String lastName,
+    @Body("address") @NotBlank String address) {
+    Donor donor = donorRepository.save(firstName, lastName, address);
 
     return HttpResponse
       .created(donor)
@@ -71,6 +64,14 @@ public class DonorController {
     } catch (DataAccessException e) {
       return HttpResponse.noContent();
     }
+  }
+
+  @Put
+  public HttpResponse update(@Body @Valid DonorUpdateCommand command) {
+    donorRepository.update(command.getId(), command.getFirstName(), command.getLastName(), command.getAddress());
+    return HttpResponse
+      .noContent()
+      .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
   }
 
   @Delete("/{id}")

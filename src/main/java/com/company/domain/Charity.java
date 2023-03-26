@@ -1,10 +1,12 @@
 package com.company.domain;
 
+import io.micronaut.serde.annotation.Serdeable;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Serdeable
 @Entity
 @Table(name = "charities")
 @Data
