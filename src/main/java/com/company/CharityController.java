@@ -59,10 +59,10 @@ public class CharityController {
 
   @Post("/ex")
   public HttpResponse<Charity> saveExceptions(
-
     @Body("name") @NotBlank String name,
     @Body("ein") @NotBlank String ein,
     @Body("description") @NotBlank String description) {
+
     try {
       Charity charity = charityRepository.saveWithException(name, ein, description);
       return HttpResponse
