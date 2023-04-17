@@ -11,13 +11,13 @@ import javax.transaction.Transactional;
 @JdbcRepository(dialect = Dialect.MYSQL)
 public interface DonationRepository extends PageableRepository<Donation, Long> {
 
-  Donation save();
+  //Donation save();
 
   @Transactional
   default Donation saveWithException() {
-    save();
+    //save();
     throw new DataAccessException("test exception");
   }
 
-  long update();
+  //long update();
 }

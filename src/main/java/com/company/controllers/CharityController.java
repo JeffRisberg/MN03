@@ -1,5 +1,7 @@
-package com.company;
+package com.company.controllers;
 
+import com.company.CharityRepository;
+import com.company.CharityUpdateCommand;
 import com.company.domain.Charity;
 import io.micronaut.data.exceptions.DataAccessException;
 import io.micronaut.data.model.Pageable;

@@ -1,5 +1,7 @@
-package com.company;
+package com.company.controllers;
 
+import com.company.DonorRepository;
+import com.company.DonorUpdateCommand;
 import com.company.domain.Donor;
 import io.micronaut.data.exceptions.DataAccessException;
 import io.micronaut.data.model.Pageable;

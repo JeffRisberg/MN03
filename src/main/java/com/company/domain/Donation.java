@@ -2,6 +2,7 @@ package com.company.domain;
 
 import io.micronaut.serde.annotation.Serdeable;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "donations")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Donation extends AbstractItem {
 
   @Column(name = "amount", nullable = false)
