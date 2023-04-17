@@ -30,7 +30,6 @@ dependencies {
   runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
   runtimeOnly("org.slf4j:slf4j-simple")
   implementation("io.micronaut:micronaut-validation")
-
 }
 
 
