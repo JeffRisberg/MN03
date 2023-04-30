@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Serdeable
 @Entity
@@ -14,9 +13,6 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 public class Donation extends AbstractItem {
 
-  @Column(name = "amount", nullable = false)
-  private Double amount;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "donor_id")
   private Donor donor;
@@ -24,6 +20,10 @@ public class Donation extends AbstractItem {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "charity_id")
   private Charity charity;
+
+  @Column(name = "amount", nullable = false)
+  private Double amount;
+
 
   public Donation(Double amount) {
     this.setId(null);

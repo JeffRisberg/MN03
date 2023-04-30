@@ -11,5 +11,13 @@ public class DonationUpdateCommand {
   @NotNull
   private final Long id;
 
-  private final String name;
+
+  @NotNull
+  private final Long donor_id;
+
+  @NotNull
+  private final Long charity_id;
+
+  @NotNull
+  private double amount;
 }
