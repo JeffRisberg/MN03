@@ -1,4 +1,7 @@
+DROP TABLE IF EXISTS donations;
+DROP TABLE IF EXISTS donors;
 DROP TABLE IF EXISTS charities;
+
 
 CREATE TABLE charities
 (
@@ -9,7 +12,6 @@ CREATE TABLE charities
   PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS donors;
 
 CREATE TABLE donors
 (
@@ -20,8 +22,6 @@ CREATE TABLE donors
   PRIMARY KEY (id)
 );
 
-
-DROP TABLE IF EXISTS donations;
 
 CREATE TABLE donations
 (
