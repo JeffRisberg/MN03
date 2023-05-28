@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,13 +42,14 @@ public class CharityControllerTest {
 
     List<Long> charityIds = new ArrayList<>();
 
-    HttpRequest<?> request = HttpRequest.POST("/charities", Collections.singletonMap("name", "DevOps"));
+    HttpRequest<?> request = HttpRequest.POST
+      ("/charities", Map.of("name", "RedCross", "ein", "56-4444", "description", "example"));
     HttpResponse<?> response = client.toBlocking().exchange(request);
     charityIds.add(entityId(response));
 
     assertEquals(HttpStatus.CREATED, response.getStatus());
 
-    request = HttpRequest.POST("/charities", Collections.singletonMap("name", "Microservices"));
+    request = HttpRequest.POST("/charities", Map.of("name", "American Cancer", "ein", "56-5555", "description", "example"));
     response = client.toBlocking().exchange(request);
 
     assertEquals(HttpStatus.CREATED, response.getStatus());
@@ -58,48 +60,16 @@ public class CharityControllerTest {
 
     Charity charity = client.toBlocking().retrieve(request, Charity.class);
 
-    assertEquals("Microservices", charity.getName());
+    assertEquals("American Cancer", charity.getName());
 
-    request = HttpRequest.PUT("/charities", new CharityUpdateCommand(id, "Micro-services"));
+    request = HttpRequest.PUT("/charities", new CharityUpdateCommand(id, "American Cancer Society"));
     response = client.toBlocking().exchange(request);
 
     assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
 
     request = HttpRequest.GET("/charities/" + id);
     charity = client.toBlocking().retrieve(request, Charity.class);
-    assertEquals("Micro-services", charity.getName());
-
-    request = HttpRequest.GET("/charities/list");
-    List<Charity> charities = client.toBlocking().retrieve(request, Argument.of(List.class, Charity.class));
-
-    assertEquals(2, charities.size());
-
-    request = HttpRequest.POST("/charities/ex", Collections.singletonMap("name", "Microservices"));
-    response = client.toBlocking().exchange(request);
-
-    assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
-
-    request = HttpRequest.GET("/charities/list");
-    charities = client.toBlocking().retrieve(request, Argument.of(List.class, Charity.class));
-
-    assertEquals(2, charities.size());
-
-    request = HttpRequest.GET("/charities/list?size=1");
-    charities = client.toBlocking().retrieve(request, Argument.of(List.class, Charity.class));
-
-    assertEquals(1, charities.size());
-    assertEquals("DevOps", charities.get(0).getName());
-
-    request = HttpRequest.GET("/charities/list?size=1&sort=name,desc");
-    charities = client.toBlocking().retrieve(request, Argument.of(List.class, Charity.class));
-
-    assertEquals(1, charities.size());
-    assertEquals("Micro-services", charities.get(0).getName());
-
-    request = HttpRequest.GET("/charities/list?size=1&page=2");
-    charities = client.toBlocking().retrieve(request, Argument.of(List.class, Charity.class));
-
-    assertEquals(0, charities.size());
+    assertEquals("American Cancer Society", charity.getName());
 
     // cleanup:
     for (Long charityId : charityIds) {

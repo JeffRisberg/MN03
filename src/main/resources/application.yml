@@ -4,14 +4,11 @@ micronaut:
 
 datasources:
   default:
-    url: jdbc:mysql://localhost:3306/mydb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.mariadb.jdbc.Driver
     db-type: mariadb
-    dialect: MYSQL
 
 jpa.default.properties.hibernate.hbm2ddl.auto: none
 jpa.default.entity-scan.packages: com.company.domain
-
 
 jpa:
   default:
