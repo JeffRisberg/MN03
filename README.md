@@ -42,6 +42,10 @@
 - [https://flywaydb.org/](https://flywaydb.org/)
 
 
+## test this as
+
+./gradlew test
+
 ## run this as
 
 ./gradlew run
