@@ -24,12 +24,10 @@ dependencies {
   implementation("io.micronaut.jaxrs:micronaut-jaxrs-server")
   implementation("io.micronaut.sql:micronaut-hibernate-jpa")
   implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-  implementation("jakarta.annotation:jakarta.annotation-api")
   compileOnly("org.projectlombok:lombok")
   runtimeOnly("org.flywaydb:flyway-mysql")
   runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
   runtimeOnly("org.slf4j:slf4j-simple")
-  implementation("io.micronaut:micronaut-validation")
 }
 
 application {
