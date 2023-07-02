@@ -50,3 +50,12 @@
 
 ./gradlew run
 
+## sample urls
+
+curl http://localhost:8080/charities/list
+
+curl -X POST http://localhost:8080/charities -H 'Content-Type: application/json' -d '
+{"name": "American Cancer", "ein": "56-5555", "description": "example"}
+'
+
+curl http://localhost:8080/charities/list
