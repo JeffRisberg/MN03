@@ -3,6 +3,7 @@ package com.company;
 import com.company.domain.Charity;
 import com.company.domain.Donation;
 import com.company.domain.Donor;
+import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.exceptions.DataAccessException;
 import io.micronaut.data.jdbc.annotation.JdbcRepository;
 import io.micronaut.data.model.query.builder.sql.Dialect;
@@ -11,7 +12,7 @@ import io.micronaut.data.repository.PageableRepository;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
-@JdbcRepository(dialect = Dialect.MYSQL)
+@Repository()
 public interface DonationRepository extends PageableRepository<Donation, Long> {
 
   Donation save(@NotNull Donor donor, @NotNull Charity charity, @NotNull double amount);
