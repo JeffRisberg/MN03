@@ -21,13 +21,17 @@ public class AbstractItem implements Serializable {
   @Column(name = "last_updated", nullable = true)
   private Date lastUpdated;
 
+  /*
   @PrePersist
   protected void onCreate() {
+    System.out.println("CHECK onCREATE");
     dateCreated = new Date();
   }
 
   @PreUpdate
   protected void onUpdate() {
+    System.out.println("CHECK onUPDATE");
     lastUpdated = new Date();
   }
+  */
 }
