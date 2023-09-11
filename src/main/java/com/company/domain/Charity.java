@@ -17,10 +17,13 @@ public class Charity {
   protected Long id;
 
   @NotNull
+  @Column(name = "name", nullable = false)
   private String name;
 
   @NotNull
+  @Column(name = "ein", nullable = false)
   private String ein;
 
+  @Column(name = "description", nullable = false)
   private String description;
 }

@@ -24,5 +24,6 @@ public class Donor {
   @Column(name = "last_name", nullable = false)
   private String lastName;
 
+  @Column(name = "address", nullable = true)
   private String address;
 }
