@@ -38,3 +38,37 @@
 - [https://flywaydb.org/](https://flywaydb.org/)
 
 
+## test this as
+
+./gradlew test
+
+## run this as
+
+./gradlew run
+
+## sample urls
+
+curl http://localhost:8080/charities/list
+
+curl -X POST http://localhost:8080/charities -H 'Content-Type: application/json' -d '
+{"name": "American Cancer", "ein": "56-5555", "description": "example"}
+'
+
+curl http://localhost:8080/charities/list
+
+curl http://localhost:8080/donors/list
+
+curl -X POST http://localhost:8080/donors -H 'Content-Type: application/json' -d '
+{"firstName": "Bob", "lastName": "Smith", "address": "Palo Alto, CA"}
+'
+
+curl http://localhost:8080/donors/list
+
+curl -X POST http://localhost:8080/donations -H 'Content-Type: application/json' -d '
+{"donor_id": 1, "charity_id": 1, "amount": 2000.0}
+'
+
+curl -X DELETE http://localhost:8080/donors/1
+
+curl -X DELETE http://localhost:8080/charities/1
+
