@@ -3,4 +3,4 @@ defaultPackage: com.company
 testFramework: junit
 sourceLanguage: java
 buildTool: gradle
-features: [ annotation-api, app-name, data, data-jpa, flyway, gradle, hibernate-jpa, http-client, jackson-databind, java, java-application, jax-rs, jdbc-hikari, junit, lombok, mariadb, micronaut-build, netty-server, readme, shade, slf4j-simple, test-resources, yaml ]
+features: [ annotation-api, app-name, data, data-jpa, flyway, gradle, hibernate-jpa, http-client, jackson-databind, java, java-application, jax-rs, jdbc-hikari, junit, lombok, mariadb, micronaut-aot, micronaut-build, netty-server, properties, readme, shade, slf4j-simple, test-resources, yaml ]

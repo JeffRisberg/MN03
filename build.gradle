@@ -27,11 +27,13 @@ dependencies {
   implementation("io.micronaut.jaxrs:micronaut-jaxrs-server")
   implementation("io.micronaut.sql:micronaut-hibernate-jpa")
   implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+  testImplementation("org.testcontainers:junit-jupiter")
+  testImplementation("org.testcontainers:mariadb")
+  testImplementation("org.testcontainers:testcontainers")
   compileOnly("org.projectlombok:lombok")
   runtimeOnly("org.flywaydb:flyway-mysql")
   runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
   runtimeOnly("org.slf4j:slf4j-simple")
-  runtimeOnly("org.yaml:snakeyaml")
 }
 
 application {
@@ -50,6 +52,17 @@ micronaut {
   processing {
     incremental(true)
     annotations("com.company.*")
+  }
+  aot {
+    // Please review carefully the optimizations enabled below
+    // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+    optimizeServiceLoading = false
+    convertYamlToJava = false
+    precomputeOperations = true
+    cacheEnvironment = true
+    optimizeClassLoading = true
+    deduceEnvironment = true
+    optimizeNetty = true
   }
 }
 
