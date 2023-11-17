@@ -32,7 +32,7 @@ public interface DonationRepository extends PageableRepository<Donation, Long> {
   }
 
   long update(
-    @NonNull @NotNull @Id Long id,
+      @NonNull @NotNull @Id Long id,
       @NotNull Long donorId,
       @NotNull Long charityId,
       @NotNull Double amount,
