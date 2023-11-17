@@ -1,9 +1,11 @@
 package com.company.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
 @Serdeable
 @Entity
@@ -26,4 +28,10 @@ public class Donor {
 
   @Column(name = "address", nullable = true)
   private String address;
+
+  @OneToMany(mappedBy = "donor", fetch = FetchType.EAGER)
+  @JsonIgnore
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  private Set<Donation> donations = new HashSet<Donation>();
 }

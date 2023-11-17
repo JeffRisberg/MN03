@@ -11,12 +11,11 @@ import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @ExecuteOn(TaskExecutors.IO)
 @Controller("/donors")
@@ -33,36 +32,32 @@ public class DonorController {
     return donorRepository.findAll(pageable).getContent();
   }
 
-
   @Get("/{id}")
   public Optional<Donor> show(Long id) {
-    return donorRepository
-      .findById(id);
+    return donorRepository.findById(id);
   }
 
   @Post
   public HttpResponse<Donor> save(
-    @Body("firstName") @NotBlank String firstName,
-    @Body("lastName") @NotBlank String lastName,
-    @Body("address") @NotBlank String address) {
+      @Body("firstName") @NotBlank String firstName,
+      @Body("lastName") @NotBlank String lastName,
+      @Body("address") @NotBlank String address) {
     Donor donor = donorRepository.save(firstName, lastName, address);
 
-    return HttpResponse
-      .created(donor)
-      .headers(headers -> headers.location(location(donor.getId())));
+    return HttpResponse.created(donor)
+        .headers(headers -> headers.location(location(donor.getId())));
   }
 
   @Post("/ex")
   public HttpResponse<Donor> saveExceptions(
-    @Body("firstName") @NotBlank String firstName,
-    @Body("lastName") @NotBlank String lastName,
-    @Body("address") @NotBlank String address) {
+      @Body("firstName") @NotBlank String firstName,
+      @Body("lastName") @NotBlank String lastName,
+      @Body("address") @NotBlank String address) {
 
     try {
       Donor donor = donorRepository.saveWithException(firstName, lastName, address);
-      return HttpResponse
-        .created(donor)
-        .headers(headers -> headers.location(location(donor.getId())));
+      return HttpResponse.created(donor)
+          .headers(headers -> headers.location(location(donor.getId())));
     } catch (DataAccessException e) {
       return HttpResponse.noContent();
     }
@@ -70,10 +65,10 @@ public class DonorController {
 
   @Put
   public HttpResponse update(@Body @Valid DonorUpdateCommand command) {
-    donorRepository.update(command.getId(), command.getFirstName(), command.getLastName(), command.getAddress());
-    return HttpResponse
-      .noContent()
-      .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
+    donorRepository.update(
+        command.getId(), command.getFirstName(), command.getLastName(), command.getAddress());
+    return HttpResponse.noContent()
+        .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
   }
 
   @Delete("/{id}")
