@@ -2,9 +2,9 @@ package com.company.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.*;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import lombok.*;
 
 @Serdeable

@@ -11,11 +11,11 @@ import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 @ExecuteOn(TaskExecutors.IO)
 @Controller("/donors")

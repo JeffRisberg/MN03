@@ -2,8 +2,8 @@ package com.company.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
+import jakarta.persistence.*;
 import java.util.Date;
-import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

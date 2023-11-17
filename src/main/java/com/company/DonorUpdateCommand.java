@@ -1,9 +1,8 @@
 package com.company;
 
 import io.micronaut.serde.annotation.Serdeable;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 @Serdeable
