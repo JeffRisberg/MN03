@@ -1,27 +1,41 @@
 package com.company;
 
-import com.company.domain.Charity;
 import com.company.domain.Donation;
-import com.company.domain.Donor;
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.exceptions.DataAccessException;
-import io.micronaut.data.jdbc.annotation.JdbcRepository;
-import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.repository.PageableRepository;
-
+import java.util.Date;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 @Repository()
 public interface DonationRepository extends PageableRepository<Donation, Long> {
 
-  Donation save(@NotNull Donor donor, @NotNull Charity charity, @NotNull double amount);
+  Donation save(
+      @NotNull Long donorId,
+      @NotNull Long charityId,
+      @NotNull Double amount,
+      Date dateCreated,
+      Date lastUpdated);
 
   @Transactional
-  default Donation saveWithException(@NotNull Donor donor, @NotNull Charity charity, @NotNull double amount) {
-    save(donor, charity, amount);
+  default Donation saveWithException(
+      @NotNull Long donorId,
+      @NotNull Long charityId,
+      @NotNull Double amount,
+      @NotNull Date dateCreated,
+      @NotNull Date lastUpdated) {
+    save(donorId, charityId, amount, dateCreated, lastUpdated);
     throw new DataAccessException("test exception");
   }
 
-  long update(@NotNull Donor donor, @NotNull Charity charity, @NotNull double amount);
+  long update(
+    @NonNull @NotNull @Id Long id,
+      @NotNull Long donorId,
+      @NotNull Long charityId,
+      @NotNull Double amount,
+      @NotNull Date dateCreated,
+      @NotNull Date lastUpdated);
 }

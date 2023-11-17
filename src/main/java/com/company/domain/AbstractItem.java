@@ -12,8 +12,16 @@ import java.util.Date;
 public class AbstractItem implements Serializable {
   @Id
   @Column(name = "id", unique = true)
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  protected void init(long id) {
+    this.setId(id);
+  }
+
+  protected void init(String id, EntityType type) {
+    this.setId(CryptoUtils.generateEntityId(id, type));
+  }
 
   @Column(name = "date_created", nullable = false)
   private Date dateCreated;

@@ -1,10 +1,9 @@
 package com.company.domain;
 
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.Data;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 @Serdeable
 @Entity
@@ -13,6 +12,7 @@ import javax.validation.constraints.NotNull;
 public class Charity {
 
   @Id
+  @Column(name = "id", nullable = false, unique = true)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   protected Long id;
 

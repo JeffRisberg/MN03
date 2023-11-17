@@ -1,6 +1,7 @@
 package com.company;
 
 import io.micronaut.serde.annotation.Serdeable;
+import java.util.Date;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -11,7 +12,6 @@ public class DonationUpdateCommand {
   @NotNull
   private final Long id;
 
-
   @NotNull
   private final Long donor_id;
 
@@ -19,5 +19,11 @@ public class DonationUpdateCommand {
   private final Long charity_id;
 
   @NotNull
-  private double amount;
+  private Double amount;
+
+  @NotNull
+  private Date dateCreated;
+
+  @NotNull
+  private Date lastUpdated;
 }
