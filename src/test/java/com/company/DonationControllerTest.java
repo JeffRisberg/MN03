@@ -1,6 +1,7 @@
 package com.company;
 
-import com.company.domain.Charity;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.company.domain.Donation;
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpRequest;
@@ -10,11 +11,8 @@ import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.Test;
-
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 @MicronautTest
 public class DonationControllerTest {
@@ -31,22 +29,29 @@ public class DonationControllerTest {
     Long donationId = 0L;
 
     // create charity
-    HttpRequest<?> request = HttpRequest.POST
-      ("/charities", Map.of("name", "Red Cross", "ein", "56-4444", "description", "example"));
+    HttpRequest<?> request =
+        HttpRequest.POST(
+            "/charities", Map.of("name", "Red Cross", "ein", "56-4444", "description", "example"));
     HttpResponse<?> response = client.toBlocking().exchange(request);
     charityId = entityId(response, "/charities/");
 
     assertEquals(HttpStatus.CREATED, response.getStatus());
 
     // create donor
-    request = HttpRequest.POST("/donors", Map.of("firstName", "Sally", "lastName", "Smith", "address", "University Ave"));
+    request =
+        HttpRequest.POST(
+            "/donors",
+            Map.of("firstName", "Sally", "lastName", "Smith", "address", "University Ave"));
     response = client.toBlocking().exchange(request);
     donorId = entityId(response, "/donors/");
 
     assertEquals(HttpStatus.CREATED, response.getStatus());
 
     // create donation
-    request = HttpRequest.POST("/donations", Map.of("donor_id", donorId, "charity_id", charityId, "amount", donationAmount));
+    request =
+        HttpRequest.POST(
+            "/donations",
+            Map.of("donor_id", donorId, "charity_id", charityId, "amount", donationAmount));
     response = client.toBlocking().exchange(request);
     donationId = entityId(response, "/donations/");
 
