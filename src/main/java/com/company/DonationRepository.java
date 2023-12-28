@@ -8,6 +8,8 @@ import io.micronaut.data.exceptions.DataAccessException;
 import io.micronaut.data.repository.PageableRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Repository()
@@ -17,16 +19,16 @@ public interface DonationRepository extends PageableRepository<Donation, Long> {
       @NotNull Long donorId,
       @NotNull Long charityId,
       @NotNull Double amount,
-      Date dateCreated,
-      Date lastUpdated);
+      LocalDateTime dateCreated,
+      LocalDateTime lastUpdated);
 
   @Transactional
   default Donation saveWithException(
       @NotNull Long donorId,
       @NotNull Long charityId,
       @NotNull Double amount,
-      @NotNull Date dateCreated,
-      @NotNull Date lastUpdated) {
+      @NotNull LocalDateTime dateCreated,
+      @NotNull LocalDateTime lastUpdated) {
     save(donorId, charityId, amount, dateCreated, lastUpdated);
     throw new DataAccessException("test exception");
   }
@@ -36,6 +38,6 @@ public interface DonationRepository extends PageableRepository<Donation, Long> {
       @NotNull Long donorId,
       @NotNull Long charityId,
       @NotNull Double amount,
-      @NotNull Date dateCreated,
-      @NotNull Date lastUpdated);
+      @NotNull LocalDateTime dateCreated,
+      @NotNull LocalDateTime lastUpdated);
 }

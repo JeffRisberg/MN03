@@ -1,6 +1,9 @@
 package com.company.controllers;
 
-import com.company.*;
+import com.company.CharityRepository;
+import com.company.DonationRepository;
+import com.company.DonationUpdateCommand;
+import com.company.DonorRepository;
 import com.company.domain.Donation;
 import com.company.domain.Donor;
 import io.micronaut.data.exceptions.DataAccessException;
@@ -12,9 +15,13 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.net.URI;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @ExecuteOn(TaskExecutors.IO)
 @Controller("/donations")
@@ -25,9 +32,9 @@ public class DonationController {
   protected final CharityRepository charityRepository;
 
   public DonationController(
-      DonationRepository donationRepository,
-      DonorRepository donorRepository,
-      CharityRepository charityRepository) {
+    DonationRepository donationRepository,
+    DonorRepository donorRepository,
+    CharityRepository charityRepository) {
     this.donationRepository = donationRepository;
     this.donorRepository = donorRepository;
     this.charityRepository = charityRepository;
@@ -45,35 +52,37 @@ public class DonationController {
 
   @Post
   public HttpResponse<Donation> save(
-      @Body("donor_id") @NotBlank Long donorId,
-      @Body("charity_id") @NotBlank Long charityId,
-      @Body("amount") @NotBlank Double amount) {
+    @Body("donor_id") @NotNull Long donorId,
+    @Body("charity_id") @NotNull Long charityId,
+    @Body("amount") @NotNull Double amount) {
 
     System.out.println("amount " + amount);
 
-    Date dateCreated = new Date();
-    Date lastUpdated = new Date();
+    LocalDateTime dateCreated = LocalDateTime.now();
+    LocalDateTime lastUpdated = LocalDateTime.now();
+
     Donation donation =
-        donationRepository.save(donorId, charityId, amount, dateCreated, lastUpdated);
+      donationRepository.save(donorId, charityId, amount, dateCreated, lastUpdated);
 
     return HttpResponse.created(donation)
-        .headers(headers -> headers.location(location(donation.getId())));
+      .headers(headers -> headers.location(location(donation.getId())));
   }
 
   @Post("/ex")
   public HttpResponse<Donation> saveExceptions(
-      @Body("donor_id") @NotBlank Long donorId,
-      @Body("charity_id") @NotBlank Long charityId,
-      @Body("amount") @NotBlank Double amount) {
+    @Body("donor_id") @NotNull Long donorId,
+    @Body("charity_id") @NotNull Long charityId,
+    @Body("amount") @NotNull Double amount) {
 
     try {
-      Date dateCreated = new Date();
-      Date lastUpdated = new Date();
+      LocalDateTime dateCreated = LocalDateTime.now();
+      LocalDateTime lastUpdated = LocalDateTime.now();
+
       Donation donation =
-          donationRepository.saveWithException(
-              donorId, charityId, amount, dateCreated, lastUpdated);
+        donationRepository.saveWithException(
+          donorId, charityId, amount, dateCreated, lastUpdated);
       return HttpResponse.created(donation)
-          .headers(headers -> headers.location(location(donation.getId())));
+        .headers(headers -> headers.location(location(donation.getId())));
     } catch (DataAccessException e) {
       return HttpResponse.noContent();
     }
@@ -82,14 +91,14 @@ public class DonationController {
   @Put
   public HttpResponse update(@Body @Valid DonationUpdateCommand command) {
     donationRepository.update(
-        command.getId(),
-        command.getDonor_id(),
-        command.getCharity_id(),
-        command.getAmount(),
-        command.getDateCreated(),
-        command.getLastUpdated());
+      command.getId(),
+      command.getDonor_id(),
+      command.getCharity_id(),
+      command.getAmount(),
+      command.getDateCreated(),
+      command.getLastUpdated());
     return HttpResponse.noContent()
-        .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
+      .header(HttpHeaders.LOCATION, location(command.getId()).getPath());
   }
 
   @Delete("/{id}")

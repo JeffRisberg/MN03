@@ -3,6 +3,8 @@ package com.company.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -42,7 +44,7 @@ public class Donation extends AbstractItem {
     this.amount = amount;
   }
 
-  public Donation(Long donorId, Long charityId, Double amount, Date dateCreated, Date lastUpdated) {
+  public Donation(Long donorId, Long charityId, Double amount, LocalDateTime dateCreated, LocalDateTime lastUpdated) {
     this.setId(null);
     setDonorId(donorId);
     setCharityId(charityId);

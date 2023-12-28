@@ -29,7 +29,7 @@ CREATE TABLE donations
   donor_id   BIGINT NOT NULL,
   charity_id BIGINT NOT NULL,
   amount     DOUBLE NOT NULL,
-  date_created DATE NULL,
-  last_updated DATE NULL,
+  date_created DATETIME NOT NULL,
+  last_updated DATETIME NOT NULL,
   PRIMARY KEY (id)
 );

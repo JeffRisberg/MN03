@@ -2,8 +2,9 @@ package com.company;
 
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.validation.constraints.NotNull;
-import java.util.Date;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 @Serdeable
@@ -21,8 +22,8 @@ public class DonationUpdateCommand {
   private Double amount;
 
   @NotNull
-  private Date dateCreated;
+  private LocalDateTime dateCreated;
 
   @NotNull
-  private Date lastUpdated;
+  private LocalDateTime lastUpdated;
 }

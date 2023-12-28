@@ -2,10 +2,9 @@ package com.company.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Data
@@ -24,22 +23,8 @@ public class AbstractItem implements Serializable {
   }
 
   @Column(name = "date_created", nullable = false)
-  private Date dateCreated;
+  private LocalDateTime dateCreated;
 
   @Column(name = "last_updated", nullable = true)
-  private Date lastUpdated;
-
-  /*
-  @PrePersist
-  protected void onCreate() {
-    System.out.println("CHECK onCREATE");
-    dateCreated = new Date();
-  }
-
-  @PreUpdate
-  protected void onUpdate() {
-    System.out.println("CHECK onUPDATE");
-    lastUpdated = new Date();
-  }
-  */
+  private LocalDateTime lastUpdated;
 }
