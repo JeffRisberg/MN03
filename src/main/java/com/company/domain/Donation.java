@@ -3,11 +3,10 @@ package com.company.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.time.LocalDateTime;
 
 @Serdeable
 @Entity
@@ -26,10 +25,10 @@ public class Donation extends AbstractItem {
 
   @ManyToOne(targetEntity = Charity.class)
   @JoinColumn(
-      name = "charity_id",
-      insertable = false,
-      updatable = false,
-      referencedColumnName = "id")
+    name = "charity_id",
+    insertable = false,
+    updatable = false,
+    referencedColumnName = "id")
   @JsonIgnore
   private Charity charity;
 
@@ -53,7 +52,8 @@ public class Donation extends AbstractItem {
     setLastUpdated(lastUpdated);
   }
 
-  public Donation() {}
+  public Donation() {
+  }
 
   public String toString() {
     StringBuilder sb = new StringBuilder();
