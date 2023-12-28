@@ -13,3 +13,4 @@ out/
 .classpath
 .factorypath
 .idea/workspace
+.idea/libraries
