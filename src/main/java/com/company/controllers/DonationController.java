@@ -5,7 +5,6 @@ import com.company.DonationRepository;
 import com.company.DonationUpdateCommand;
 import com.company.DonorRepository;
 import com.company.domain.Donation;
-import com.company.domain.Donor;
 import io.micronaut.data.exceptions.DataAccessException;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.http.HttpHeaders;
@@ -16,10 +15,8 @@ import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
