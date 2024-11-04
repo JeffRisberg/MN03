@@ -1,8 +1,8 @@
 plugins {
   id("com.github.johnrengelman.shadow") version "8.1.1"
-  id("io.micronaut.application") version "4.2.0"
-  id("io.micronaut.test-resources") version "4.2.0"
-  id("io.micronaut.aot") version "4.2.0"
+  id("io.micronaut.application") version "4.4.2"
+  id("io.micronaut.test-resources") version "4.4.2"
+  id("io.micronaut.aot") version "4.4.2"
 }
 
 version = "0.1"
@@ -24,6 +24,7 @@ dependencies {
   implementation("io.micronaut.serde:micronaut-serde-jackson")
   implementation("io.micronaut.sql:micronaut-hibernate-jpa")
   implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+  annotationProcessor(group: 'io.swagger', name: 'swagger-annotations', version: '1.6.2')
   compileOnly("io.micronaut:micronaut-http-client")
   compileOnly("org.projectlombok:lombok")
   runtimeOnly("org.flywaydb:flyway-mysql")
