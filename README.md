@@ -68,6 +68,8 @@ curl -X POST http://localhost:8080/donations -H 'Content-Type: application/json'
 {"donor_id": 1, "charity_id": 1, "amount": 2000.0}
 '
 
+curl -X DELETE http://localhost:8080/donations/1
+
 curl -X DELETE http://localhost:8080/donors/1
 
 curl -X DELETE http://localhost:8080/charities/1
